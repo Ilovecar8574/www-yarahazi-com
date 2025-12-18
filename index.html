@@ -1,10 +1,120 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="ja" data-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <title>GitHub Pages Test</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Theme Test</title>
+
+  <style>
+    /* =========================
+       Theme Variables
+    ========================= */
+    :root {
+      --accent: #436aa8;
+
+      /* dark default */
+      --bg: #0f0f0f;
+      --text-main: #f2f2f2;
+      --text-sub: #9a9a9a;
+    }
+
+    html[data-theme="light"] {
+      --bg: #ffffff;
+      --text-main: #111111;
+      --text-sub: #666666;
+    }
+
+    html[data-theme="dark"] {
+      --bg: #0f0f0f;
+      --text-main: #f2f2f2;
+      --text-sub: #9a9a9a;
+    }
+
+    /* =========================
+       Base
+    ========================= */
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text-main);
+      font-family: "Noto Sans JP", system-ui, sans-serif;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    /* =========================
+       Layout
+    ========================= */
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center; /* 縦中央 */
+      align-items: center;     /* 横中央 */
+    }
+
+    /* =========================
+       Text
+    ========================= */
+    .main-text {
+      font-size: 28px;
+      letter-spacing: 0.05em;
+    }
+
+    /* =========================
+       Theme Toggle
+    ========================= */
+    .theme-toggle {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+
+      background: none;
+      border: none;
+      color: var(--text-sub);
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    .theme-toggle:hover {
+      color: var(--accent);
+    }
+  </style>
 </head>
+
 <body>
-  <h1>表示テスト成功</h1>
+  <main class="container">
+    <div class="main-text">テキスト</div>
+  </main>
+
+  <button class="theme-toggle" id="theme-toggle">
+    theme
+  </button>
+
+  <script>
+    const html = document.documentElement;
+    const toggle = document.getElementById("theme-toggle");
+
+    // 初期テーマ（保存 or OS設定）
+    const savedTheme = localStorage.getItem("theme");
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+    if (savedTheme) {
+      html.dataset.theme = savedTheme;
+    } else {
+      html.dataset.theme = prefersDark ? "dark" : "light";
+    }
+
+    // 切り替え
+    toggle.addEventListener("click", () => {
+      const current = html.dataset.theme;
+      const next = current === "dark" ? "light" : "dark";
+
+      html.dataset.theme = next;
+      localStorage.setItem("theme", next);
+    });
+  </script>
 </body>
 </html>
