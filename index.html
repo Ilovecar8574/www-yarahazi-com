@@ -58,7 +58,7 @@
     }
 
     /* =========================
-       Theme Toggle (回転)
+       Theme Toggle (◐ 180°回転)
     ========================= */
     .theme-toggle {
       position: fixed;
@@ -89,7 +89,7 @@
       transition: transform 0.4s ease;
     }
 
-    .rotate {
+    .rotated {
       transform: rotate(180deg);
     }
   </style>
@@ -102,7 +102,7 @@
 
   <!-- Theme Toggle -->
   <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
-    <span class="theme-icon" id="theme-icon">☾</span>
+    <span class="theme-icon" id="theme-icon">◐</span>
   </button>
 
   <script>
@@ -110,26 +110,23 @@
     const toggle = document.getElementById("theme-toggle");
     const icon = document.getElementById("theme-icon");
 
-    // デフォルトは light（保存があればそれを優先）
+    // デフォルトは light（保存があれば優先）
     const savedTheme = localStorage.getItem("theme");
     html.dataset.theme = savedTheme ? savedTheme : "light";
 
-    function updateIcon(theme) {
-      icon.textContent = theme === "dark" ? "☀︎" : "☾";
+    // 初期回転状態をテーマに合わせる
+    if (html.dataset.theme === "dark") {
+      icon.classList.add("rotated");
     }
 
-    updateIcon(html.dataset.theme);
-
     toggle.addEventListener("click", () => {
-      const next = html.dataset.theme === "dark" ? "light" : "dark";
+      const isDark = html.dataset.theme === "dark";
+      const next = isDark ? "light" : "dark";
 
       html.dataset.theme = next;
       localStorage.setItem("theme", next);
 
-      icon.classList.add("rotate");
-      setTimeout(() => icon.classList.remove("rotate"), 400);
-
-      updateIcon(next);
+      icon.classList.toggle("rotated");
     });
   </script>
 </body>
