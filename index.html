@@ -12,7 +12,6 @@
     :root {
       --accent: #436aa8;
 
-      /* light default */
       --bg: #ffffff;
       --text-main: #111111;
       --text-sub: #666666;
@@ -64,20 +63,19 @@
     }
 
     /* =========================
-       Theme Toggle
+       Theme Toggle（最前面固定）
     ========================= */
     .theme-toggle {
       position: fixed;
       right: 24px;
       bottom: 24px;
+      z-index: 1000; /* ← 重要 */
 
       background: none;
       border: none;
-
       color: var(--text-sub);
       font-size: 22px;
       padding: 10px;
-
       cursor: pointer;
     }
 
@@ -98,6 +96,9 @@
        Footer
     ========================= */
     .site-footer {
+      position: relative;
+      z-index: 1;
+
       padding: 24px;
       text-align: center;
       font-size: 0.85rem;
