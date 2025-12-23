@@ -1,9 +1,5 @@
-/* =========================
-   Theme Variables
-========================= */
 :root {
   --accent: #436aa8;
-
   --bg: #ffffff;
   --text-main: #111111;
   --text-sub: #666666;
@@ -15,53 +11,52 @@ html[data-theme="dark"] {
   --text-sub: #9a9a9a;
 }
 
-/* =========================
-   Base
-========================= */
 body {
   margin: 0;
-  min-height: 100vh;
+  padding-top: 64px;
   background: var(--bg);
   color: var(--text-main);
   font-family: "Noto Sans JP", system-ui, sans-serif;
   transition: background 0.3s, color 0.3s;
-  display: flex;
-  flex-direction: column;
-  padding-top: 64px; /* 固定ヘッダー分 */
 }
 
-main {
-  flex: 1;
-}
-
-/* =========================
-   Layout
-========================= */
 .container {
   max-width: 800px;
-  margin: 0 auto;
   min-height: 100vh;
+  margin: 0 auto;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* =========================
-   Text
-========================= */
 .main-text {
   font-size: 28px;
   letter-spacing: 0.08em;
-  font-weight: 500;
 }
 
-/* =========================
-   Footer
-========================= */
-.site-footer {
-  padding: 24px;
-  text-align: center;
-  font-size: 0.85rem;
+/* Theme toggle */
+.theme-toggle {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: none;
+  background: none;
   color: var(--text-sub);
-  opacity: 0.8;
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+.theme-icon {
+  transition: transform 0.4s ease;
+}
+
+.rotated {
+  transform: rotate(180deg);
 }
