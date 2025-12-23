@@ -35,6 +35,7 @@
       transition: background 0.3s, color 0.3s;
       display: flex;
       flex-direction: column;
+      padding-top: 64px; /* ヘッダー分 */
     }
 
     main {
@@ -63,13 +64,75 @@
     }
 
     /* =========================
-       Theme Toggle（最前面固定）
+       Header
+    ========================= */
+    #site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 64px;
+      background: color-mix(in srgb, var(--bg) 80%, transparent);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+      transition: transform 0.3s ease, height 0.3s ease, box-shadow 0.3s ease;
+      z-index: 900;
+    }
+
+    html[data-theme="dark"] #site-header {
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    #site-header.hide {
+      transform: translateY(-100%);
+    }
+
+    #site-header.shrink {
+      height: 48px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    .header-inner {
+      max-width: 1100px;
+      height: 100%;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      color: var(--text-main);
+    }
+
+    .nav {
+      display: flex;
+      gap: 20px;
+    }
+
+    .nav a {
+      font-size: 13px;
+      letter-spacing: 0.05em;
+      text-decoration: none;
+      color: var(--text-sub);
+    }
+
+    .nav a:hover {
+      color: var(--text-main);
+    }
+
+    /* =========================
+       Theme Toggle（右下固定）
     ========================= */
     .theme-toggle {
       position: fixed;
       right: 24px;
       bottom: 24px;
-      z-index: 1000; /* ← 重要 */
+      z-index: 1000;
 
       background: none;
       border: none;
@@ -98,7 +161,6 @@
     .site-footer {
       position: relative;
       z-index: 1;
-
       padding: 24px;
       text-align: center;
       font-size: 0.85rem;
@@ -109,6 +171,23 @@
 </head>
 
 <body>
+
+  <!-- Header -->
+  <header id="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">やらはじ</a>
+      <nav class="nav">
+        <a href="about.html">About</a>
+        <a href="news.html">News</a>
+        <a href="schedule.html">Schedule</a>
+        <a href="profile.html">Profile</a>
+        <a href="guideline.html">Guideline</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main -->
   <main class="container">
     <div class="main-text">やらはじ</div>
   </main>
@@ -119,6 +198,7 @@
   </button>
 
   <script>
+    /* Theme Toggle */
     const html = document.documentElement;
     const toggle = document.getElementById("theme-toggle");
     const icon = document.getElementById("theme-icon");
@@ -138,10 +218,32 @@
       localStorage.setItem("theme", next);
       icon.classList.toggle("rotated");
     });
+
+    /* Header Scroll Control */
+    let lastScroll = 0;
+    const header = document.getElementById("site-header");
+
+    window.addEventListener("scroll", () => {
+      const current = window.scrollY;
+
+      if (current > lastScroll && current > 80) {
+        header.classList.add("hide");
+      } else {
+        header.classList.remove("hide");
+        header.classList.add("shrink");
+      }
+
+      if (current < 10) {
+        header.classList.remove("shrink");
+      }
+
+      lastScroll = current;
+    });
   </script>
 
   <!-- Footer -->
   <div id="footer"></div>
   <script src="/common.js"></script>
+
 </body>
 </html>
