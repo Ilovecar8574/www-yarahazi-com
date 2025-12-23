@@ -20,6 +20,9 @@ body {
   transition: background 0.3s, color 0.3s;
 }
 
+/* =========================
+   Main layout
+========================= */
 .container {
   max-width: 800px;
   min-height: 100vh;
@@ -34,7 +37,9 @@ body {
   letter-spacing: 0.08em;
 }
 
-/* Theme toggle */
+/* =========================
+   Theme toggle
+========================= */
 .theme-toggle {
   position: fixed;
   right: 24px;
@@ -59,4 +64,30 @@ body {
 
 .rotated {
   transform: rotate(180deg);
+}
+
+/* =========================
+   Footer（★追加・修正部分）
+========================= */
+
+/* footer.html を読み込む外側の箱 */
+#footer {
+  display: flex;
+  justify-content: center;
+}
+
+/* footer 本体（横幅はそのまま） */
+.site-footer {
+  width: 100%;
+}
+
+/* 見た目上の中央を担当する中身 */
+.footer-inner {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 24px;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-sub);
+  opacity: 0.8;
 }
