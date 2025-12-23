@@ -1,3 +1,19 @@
+/* =========
+   Mobile menu
+========= */
+const toggle = document.getElementById("menu-toggle");
+const nav = document.getElementById("site-nav");
+
+if (toggle && nav) {
+  toggle.addEventListener("click", () => {
+    const isOpen = nav.classList.toggle("open");
+    toggle.textContent = isOpen ? "×" : "≡";
+  });
+}
+
+/* =========
+   Header scroll control
+========= */
 let lastScroll = 0;
 const header = document.getElementById("site-header");
 
