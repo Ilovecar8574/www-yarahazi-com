@@ -5,16 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>やらはじ公式サイト</title>
 
-  <!-- CSS -->
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/header.css">
 </head>
 
 <body>
 
-<!-- =========================
-     Header
-========================= -->
 <header class="site-header">
   <div class="header-inner">
     <div class="site-logo">やらはじ</div>
@@ -28,58 +24,22 @@
       <a href="contact.html">Contact</a>
     </nav>
 
-    <button class="menu-toggle" id="menu-toggle" aria-label="Menu">
-      ≡
-    </button>
+    <button class="menu-toggle" id="menu-toggle" aria-label="Menu">≡</button>
   </div>
 </header>
 
-<!-- =========================
-     Main
-========================= -->
 <main class="container">
   <div class="main-text">やらはじ</div>
 </main>
 
-<!-- =========================
-     Theme Toggle
-========================= -->
 <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
   <span class="theme-icon" id="theme-icon">◐</span>
 </button>
 
-<!-- =========================
-     Footer
-========================= -->
 <div id="footer"></div>
 
-<!-- =========================
-     Scripts
-========================= -->
 <script src="js/header.js"></script>
-
-<script>
-  const html = document.documentElement;
-  const toggle = document.getElementById("theme-toggle");
-  const icon = document.getElementById("theme-icon");
-
-  const savedTheme = localStorage.getItem("theme");
-  html.dataset.theme = savedTheme ? savedTheme : "light";
-
-  if (html.dataset.theme === "dark") {
-    icon.classList.add("rotated");
-  }
-
-  toggle.addEventListener("click", () => {
-    const isDark = html.dataset.theme === "dark";
-    const next = isDark ? "light" : "dark";
-
-    html.dataset.theme = next;
-    localStorage.setItem("theme", next);
-    icon.classList.toggle("rotated");
-  });
-</script>
-
+<script src="js/theme.js"></script>
 <script src="/common.js"></script>
 
 </body>
