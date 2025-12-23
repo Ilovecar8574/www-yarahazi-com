@@ -172,78 +172,36 @@
 
 <body>
 
-  <!-- Header -->
-  <header id="site-header">
-    <div class="header-inner">
-      <a href="index.html" class="logo">やらはじ</a>
-      <nav class="nav">
-        <a href="about.html">About</a>
-        <a href="news.html">News</a>
-        <a href="schedule.html">Schedule</a>
-        <a href="profile.html">Profile</a>
-        <a href="guideline.html">Guideline</a>
-        <a href="contact.html">Contact</a>
-      </nav>
-    </div>
-  </header>
+<header class="site-header">
+  <div class="header-inner">
+    <div class="site-logo">やらはじ</div>
 
-  <!-- Main -->
-  <main class="container">
-    <div class="main-text">やらはじ</div>
-  </main>
+    <nav class="site-nav" id="site-nav">
+      <a href="about.html">About</a>
+      <a href="news.html">News</a>
+      <a href="schedule.html">Schedule</a>
+      <a href="profile.html">Profile</a>
+      <a href="guideline.html">Guideline</a>
+      <a href="contact.html">Contact</a>
+    </nav>
 
-  <!-- Theme Toggle -->
-  <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
-    <span class="theme-icon" id="theme-icon">◐</span>
-  </button>
+    <button class="menu-toggle" id="menu-toggle" aria-label="Menu">
+      ≡
+    </button>
+  </div>
+</header>
 
-  <script>
-    /* Theme Toggle */
-    const html = document.documentElement;
-    const toggle = document.getElementById("theme-toggle");
-    const icon = document.getElementById("theme-icon");
+<main class="container">
+  <div class="main-text">やらはじ</div>
+</main>
 
-    const savedTheme = localStorage.getItem("theme");
-    html.dataset.theme = savedTheme ? savedTheme : "light";
+<!-- Theme Toggle（既存） -->
+<button class="theme-toggle" id="theme-toggle">
+  <span class="theme-icon" id="theme-icon">◐</span>
+</button>
 
-    if (html.dataset.theme === "dark") {
-      icon.classList.add("rotated");
-    }
-
-    toggle.addEventListener("click", () => {
-      const isDark = html.dataset.theme === "dark";
-      const next = isDark ? "light" : "dark";
-
-      html.dataset.theme = next;
-      localStorage.setItem("theme", next);
-      icon.classList.toggle("rotated");
-    });
-
-    /* Header Scroll Control */
-    let lastScroll = 0;
-    const header = document.getElementById("site-header");
-
-    window.addEventListener("scroll", () => {
-      const current = window.scrollY;
-
-      if (current > lastScroll && current > 80) {
-        header.classList.add("hide");
-      } else {
-        header.classList.remove("hide");
-        header.classList.add("shrink");
-      }
-
-      if (current < 10) {
-        header.classList.remove("shrink");
-      }
-
-      lastScroll = current;
-    });
-  </script>
-
-  <!-- Footer -->
-  <div id="footer"></div>
-  <script src="/common.js"></script>
+<script src="js/header.js"></script>
+<script src="/common.js"></script>
 
 </body>
 </html>
