@@ -5,173 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>やらはじ公式サイト</title>
 
-  <style>
-    /* =========================
-       Theme Variables
-    ========================= */
-    :root {
-      --accent: #436aa8;
-
-      --bg: #ffffff;
-      --text-main: #111111;
-      --text-sub: #666666;
-    }
-
-    html[data-theme="dark"] {
-      --bg: #0f0f0f;
-      --text-main: #f2f2f2;
-      --text-sub: #9a9a9a;
-    }
-
-    /* =========================
-       Base
-    ========================= */
-    body {
-      margin: 0;
-      min-height: 100vh;
-      background: var(--bg);
-      color: var(--text-main);
-      font-family: "Noto Sans JP", system-ui, sans-serif;
-      transition: background 0.3s, color 0.3s;
-      display: flex;
-      flex-direction: column;
-      padding-top: 64px; /* ヘッダー分 */
-    }
-
-    main {
-      flex: 1;
-    }
-
-    /* =========================
-       Layout
-    ========================= */
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    /* =========================
-       Text
-    ========================= */
-    .main-text {
-      font-size: 28px;
-      letter-spacing: 0.08em;
-      font-weight: 500;
-    }
-
-    /* =========================
-       Header
-    ========================= */
-    #site-header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 64px;
-      background: color-mix(in srgb, var(--bg) 80%, transparent);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(0,0,0,0.08);
-      transition: transform 0.3s ease, height 0.3s ease, box-shadow 0.3s ease;
-      z-index: 900;
-    }
-
-    html[data-theme="dark"] #site-header {
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-    }
-
-    #site-header.hide {
-      transform: translateY(-100%);
-    }
-
-    #site-header.shrink {
-      height: 48px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    }
-
-    .header-inner {
-      max-width: 1100px;
-      height: 100%;
-      margin: 0 auto;
-      padding: 0 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .logo {
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-decoration: none;
-      color: var(--text-main);
-    }
-
-    .nav {
-      display: flex;
-      gap: 20px;
-    }
-
-    .nav a {
-      font-size: 13px;
-      letter-spacing: 0.05em;
-      text-decoration: none;
-      color: var(--text-sub);
-    }
-
-    .nav a:hover {
-      color: var(--text-main);
-    }
-
-    /* =========================
-       Theme Toggle（右下固定）
-    ========================= */
-    .theme-toggle {
-      position: fixed;
-      right: 24px;
-      bottom: 24px;
-      z-index: 1000;
-
-      background: none;
-      border: none;
-      color: var(--text-sub);
-      font-size: 22px;
-      padding: 10px;
-      cursor: pointer;
-    }
-
-    .theme-toggle:hover {
-      color: var(--accent);
-    }
-
-    .theme-icon {
-      display: inline-block;
-      transition: transform 0.4s ease;
-    }
-
-    .rotated {
-      transform: rotate(180deg);
-    }
-
-    /* =========================
-       Footer
-    ========================= */
-    .site-footer {
-      position: relative;
-      z-index: 1;
-      padding: 24px;
-      text-align: center;
-      font-size: 0.85rem;
-      color: var(--text-sub);
-      opacity: 0.8;
-    }
-  </style>
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/header.css">
 </head>
 
 <body>
 
+<!-- =========================
+     Header
+========================= -->
 <header class="site-header">
   <div class="header-inner">
     <div class="site-logo">やらはじ</div>
@@ -191,16 +34,52 @@
   </div>
 </header>
 
+<!-- =========================
+     Main
+========================= -->
 <main class="container">
   <div class="main-text">やらはじ</div>
 </main>
 
-<!-- Theme Toggle（既存） -->
-<button class="theme-toggle" id="theme-toggle">
+<!-- =========================
+     Theme Toggle
+========================= -->
+<button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
   <span class="theme-icon" id="theme-icon">◐</span>
 </button>
 
+<!-- =========================
+     Footer
+========================= -->
+<div id="footer"></div>
+
+<!-- =========================
+     Scripts
+========================= -->
 <script src="js/header.js"></script>
+
+<script>
+  const html = document.documentElement;
+  const toggle = document.getElementById("theme-toggle");
+  const icon = document.getElementById("theme-icon");
+
+  const savedTheme = localStorage.getItem("theme");
+  html.dataset.theme = savedTheme ? savedTheme : "light";
+
+  if (html.dataset.theme === "dark") {
+    icon.classList.add("rotated");
+  }
+
+  toggle.addEventListener("click", () => {
+    const isDark = html.dataset.theme === "dark";
+    const next = isDark ? "light" : "dark";
+
+    html.dataset.theme = next;
+    localStorage.setItem("theme", next);
+    icon.classList.toggle("rotated");
+  });
+</script>
+
 <script src="/common.js"></script>
 
 </body>
